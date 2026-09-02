@@ -1,0 +1,31 @@
+# Java compiled files
+*.class
+
+#Old Main class
+Main.java
+
+# Java build directories
+bin/
+build/
+out/
+target/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
