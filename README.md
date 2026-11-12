@@ -1,78 +1,79 @@
-# Założenia projektu
+# Project Requirements
 
-Projekt został stworzony na podstawie wytycznych:
+The project was created based on the following guidelines:
 
-Korzystając z publicznego API dostępnego pod adresem https://fakerestapi.azurewebsites.net/index.html, napisz test w Javie. Wszystkie operacje na API muszą być wykonane z poziomu kodu Java, a nie bezpośrednio przez interfejs Swagger.
+Using the public API available at https://fakerestapi.azurewebsites.net/index.html, write a test in Java. All API operations must be performed from within the Java code, not directly through the Swagger interface.
 
-Wymagania:
+Requirements:
 
-1. W czterech równoległych wątkach utwórz czterech autorów (jeden autor na wątek).
+1. Create four authors (one author per thread) in four parallel threads.
 
-2. Zweryfikuj za pomocą API, że wszyscy autorzy zostali poprawnie utworzeni.
+2. Verify via the API that all authors were created correctly.
 
-3. Następnie otwórz UI tej samej strony i porównaj autorów wyświetlanych w UI z danymi pobranymi z API.
+3. Next, open the UI for the same page and compare the authors displayed in the UI with the data retrieved from the API.
 
-4. Przygotuj raport podsumowujący wyniki.
+4. Prepare a report summarizing the results.
 
-5. Dla lepszej czytelności i struktury rozważ użycie Cucumbera.
+5. For better readability and structure, consider using Cucumber.
 
-## Wymagania
+## Requirements
 
-Projekt wymaga zainstalowanej Javy i Google Chrome.
+This project requires Java and Google Chrome to be installed.
 
-Biblioteki zewnętrzne znajdują się w katalogu `lib`.
+External libraries are located in the `lib` directory.
 
-Są to m.in.:
+These include:
 
 - Gson
 - Selenium WebDriver
-- zależności wymagane przez Selenium
+- dependencies required by Selenium
 - Cucumber
-- zależności wymagane przez Cucumber
+- dependencies required by Cucumber
 
-## Kompilacja
+## Compilation
 
-Aby skompilować projekt w systemie Windows, należy wykonać:
+To compile the project on Windows, run the following:
 
 ```powershell
 javac -cp ".;lib/*;lib/cucumber/*" Author.java AuthorThread.java AuthorApiClient.java AuthorUiTest.java AuthorSteps.java
 ```
 
-## Uruchomienie
+## Run
 
-Aby uruchomić wszystkie scenariusze:
+To run all scenarios:
 
 ```powershell
 java -ea -cp ".;lib/*;lib/cucumber/*" io.cucumber.core.cli.Main features/authors.feature
 ```
 
-Opcja `-ea` włącza asercje Javy.
+The `-ea` option enables Java assertions.
 
-## Struktura projektu
+## Project Structure
 
-- `AuthorSteps.java` - definicje kroków Cucumbera oraz asercje wykorzystywane w scenariuszach testowych.
-- `Author.java` - model danych autora.
-- `AuthorThread.java` - obsługuje operacje POST dla pojedynczego autora wykonywane w osobnym wątku oraz GET autora po ID.
-- `AuthorApiClient.java` - pobiera listę wszystkich autorów bezpośrednio z API.
-- `AuthorUiTest.java` - obsługuje Swagger UI za pomocą Selenium i pobiera dane autorów wyświetlone w UI.
-- `features/authors.feature` - zawiera scenariusze testowe zapisane w języku Gherkin.
-- `lib/` - zawiera Gson, Selenium WebDriver i wymagane zależności.
-- `lib/cucumber/` - zawiera biblioteki wymagane do uruchomienia Cucumbera bez użycia Mavena.
-- `docs/Raport_z_testow_FakeRESTApi_Cucumber_version.pdf` - zawiera raport z testów.
+- `AuthorSteps.java` - definitions of Cucumber steps and assertions used in test scenarios.
+- `Author.java` - author data model.
+- `AuthorThread.java` - handles POST operations for a single author executed in a separate thread and GET requests for an author by ID.
+- `AuthorApiClient.java` - retrieves a list of all authors directly from the API.
+- `AuthorUiTest.java` - interacts with Swagger UI using Selenium and retrieves author data displayed in the UI.
+- `features/authors.feature` - contains test scenarios written in Gherkin.
+- `lib/` - contains Gson, Selenium WebDriver, and required dependencies.
+- `lib/cucumber/` - contains the libraries required to run Cucumber without using Maven.
+- `docs/FakeRESTApi_Cucumber_version_Test_Report.pdf` - contains the test report.
 
 ## Selenium
 
-Prosty kod Selenium wykorzystany jest z własnej inicjatywy ze względu na punkt 3 zadania:
+Simple Selenium code is used on my own initiative due to point 3 of the task:
 >(...)
->3. Następnie otwórz UI tej samej strony i porównaj autorów wyświetlanych w UI z danymi pobranymi z API.
+>3. Next, open the UI of the same page and compare the authors displayed in the UI with the data retrieved from the API.
 
-Domyślam się, że w zamyśle nie było otworzenie UI przy użyciu Selenium, jednak zrobiłam to w ramach przetestowania jak działa Selenium w Javie.
+I assume the intention was not to open the UI using Selenium, but I did so to present the usage of Selenium in Java.
 
-Kod zawarty w pliku AuthorUiTest.java otwiera stronę https://fakerestapi.azurewebsites.net/index.html, rozwija endpoint GET /api/v1/Authors, następnie klika w przyciski "Try it out" oraz "Execute", oraz zapisuje wyświetlone ciało odpowiedzi w zmiennej responseBody.
+The code in the AuthorUiTest.java file opens the page https://fakerestapi.azurewebsites.net/index.html, calls the GET endpoint /api/v1/Authors, then clicks the “Try it out” and “Execute” buttons, and stores the displayed response body in the variable responseBody.
 
-Dzięki temu mogę porównać dane pobrane bezpośrednio przez żądanie GET z danymi zwróconymi przez ten sam endpoint uruchomiony w Swagger UI.
+This allows me to compare the data retrieved directly via a GET request with the data returned by the same endpoint when run in Swagger UI.
 
-## Dodatkowe uwagi
+## Additional Notes
 
-Komentarze w kodzie zostały napisane w języku angielskim, w celu zachowania dobrej praktyki oraz spójności w kodzie.
-Projekt zawiera wersję przekształconą do struktury Cucumbera.
+The comments in the code are written in English to maintain best practices and consistency in the code.
+The project includes a version converted to the Cucumber structure.
+The original project was made in polish language and this is the translated version.
